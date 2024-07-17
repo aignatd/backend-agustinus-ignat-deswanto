@@ -1,0 +1,403 @@
+{
+	"info": {
+		"_postman_id": "90956db9-492c-496c-b9ef-77ac41c85c7f",
+		"name": "Aman Tekno Solusi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "741147",
+		"_collection_link": "https://kunyil.postman.co/workspace/Artolanggeng-Solusi-Inovasi~21bf15f1-a8ee-44a6-ac4f-5e1de88faaf2/collection/741147-90956db9-492c-496c-b9ef-77ac41c85c7f?action=share&source=collection_link&creator=741147"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Generate Token",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(pm.response.text());\r",
+									"console.log(\"Response ->\", jsonData);\r",
+									"\r",
+									"if (jsonData.data.tokenData) {\r",
+									"    pm.environment.set(\"token\", jsonData.data.tokenData);\r",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "{{password}}",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "{{username}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{localhost}}/auth/token",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"auth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Customer",
+			"item": [
+				{
+					"name": "List Transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/customer/transaction",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"customer",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/customer/transaction/customer_id/10001",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"customer",
+								"transaction",
+								"customer_id",
+								"10001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Transaction Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/customer/item",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"customer",
+								"item"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Transaction Item",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/customer/item/transaction_id/1",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"customer",
+								"item",
+								"transaction_id",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Transaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"customer\": {\r\n        \"customer_id\": 10003,\r\n        \"total\": 12000,\r\n        \"delivery_price\": 12,\r\n        \"delivery_address\": \"Jalan antaran 3\"\r\n    },\r\n    \"items\": [\r\n        {\r\n            \"product_id\": 3,\r\n            \"quantity\": 1,\r\n            \"sum\": 12000\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/customer/transaction",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"customer",
+								"transaction"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Merchant",
+			"item": [
+				{
+					"name": "List Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/merchant/product",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"merchant",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/merchant/product/product_id/99",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"merchant",
+								"product",
+								"product_id",
+								"99"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Patch Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_name\": \"Celana\",\r\n    \"product_description\": \"Celana pendek bahan jeans\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/merchant/product/product_id/4",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"merchant",
+								"product",
+								"product_id",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"product_price\": 19000,\r\n    \"product_name\": \"Jeans\",\r\n    \"product_category\": \"Busana\",\r\n    \"product_description\": \"Celana panjang bahan jeans\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{localhost}}/merchant/product",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"merchant",
+								"product"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Product",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{localhost}}/merchant/product/product_id/3",
+							"host": [
+								"{{localhost}}"
+							],
+							"path": [
+								"merchant",
+								"product",
+								"product_id",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
