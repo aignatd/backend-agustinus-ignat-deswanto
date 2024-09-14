@@ -1,10 +1,10 @@
-const mdlProduct = require('../models/productmdl');
+const mdlProduct = require('@models/productmdl');
 
 let listproducttctrl = async (req, res, next) => {
 	try {
 		console.log("---------- Get Product List ----------");
 		const result = await mdlProduct.findAll();
-		console.log("Result ->", result);
+		console.log("Result ->", result.length);
 
 		if (result.length >= 1)
 			res.status(200).json(

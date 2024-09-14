@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const { dbCon: db } = require('../config/dbcon');
+const { dbCon: db } = require('@config/dbcon');
 
 module.exports = db.define('product', {
   product_id: {

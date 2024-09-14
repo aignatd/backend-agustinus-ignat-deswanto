@@ -6,8 +6,9 @@ const dbConnection = (addOptions = {}) => {
   const user = process.env.DB_USER;
   const password = process.env.DB_PASS;
   const host = process.env.DB_HOST;
+  const port = process.env.DB_PORT;
 
-  let options = { host, dialect, ...addOptions }
+  let options = { host, dialect, port, ...addOptions }
   return new Sequelize(name, user, password, options);
 }
 

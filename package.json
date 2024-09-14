@@ -4,19 +4,30 @@
   "private": true,
   "scripts": {
     "start": "node app.js",
-    "test": "nodemon app.js"
+    "debug": "nodemon app.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
     "dayjs": "^1.11.11",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
+    "express-file-routing": "^3.0.3",
+    "express-jwt": "^8.4.1",
     "http-errors": "^2.0.0",
     "jsonwebtoken": "^9.0.2",
+    "module-alias": "^2.2.3",
     "moment-timezone": "^0.5.45",
     "mysql2": "^3.10.3",
     "nodemon": "^3.1.0",
     "sequelize": "^6.37.3",
     "uuid": "^9.0.1"
+  },
+  "_moduleAliases": {
+    "@classes": "./classes",
+    "@config": "./config",
+    "@controller": "./controllers",
+    "@models": "./models",
+    "@routes": "./routes",
+    "@utils": "./utils"
   }
 }

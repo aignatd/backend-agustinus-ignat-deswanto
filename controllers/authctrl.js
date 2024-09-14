@@ -1,4 +1,4 @@
-const authclass = require('../classes/authclass');
+const authclass = require('@classes/authclass');
 
 let gettokenctrl = async (req, res) => {
 	try {
@@ -18,7 +18,7 @@ let gettokenctrl = async (req, res) => {
 						"tokenExpiry": lastdatetime,
 						"tokenData": token,
 						"tokenType": "bearer"
- 					}
+						}		
 				});
 		}
 		else
@@ -36,55 +36,6 @@ let gettokenctrl = async (req, res) => {
 	}
 };
 
-let checktokenctrl = async (req, res, next) => {
-	try {
-		console.log("---------- Check Token ----------");
-
-		if (req.headers.authorization) {
-			const { status, result } = await new authclass(req).checkToken();
-			console.log("Result ->", result);
-
-			if (status)
-				next();
-			else {
-				if (result === "TokenExpiredError")
-					res.status(401).json(
-						{
-							code: 4001,
-							msg: "Token has expired"
-						});
-				else
-				if (result === "JsonWebTokenError")
-					res.status(403).json(
-						{
-							code: 4002,
-							msg: "The token is not valid"
-						});
-				else
-					res.status(400).json(
-						{
-							code: 4003,
-							msg: "Check existing token"
-						});
-			}
-		}
-		else {
-			console.log("Failed -> Missing token data");
-			res.status(403).json(
-				{
-					code: 4004,
-					msg: "Token not found"
-				});
-		}
-	} catch (err) {
-		console.log(err.toString());
-		res.status(500).json({
-			code: 3000,
-			msg: err
-		});
-	}
-};
-
 module.exports = {
-	gettokenctrl, checktokenctrl
+	gettokenctrl
 }

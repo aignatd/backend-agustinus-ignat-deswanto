@@ -1,5 +1,5 @@
 const { DataTypes } = require('sequelize');
-const { dbCon: db } = require('../config/dbcon');
+const { dbCon: db } = require('@config/dbcon');
 
 module.exports = db.define('transaction_customer', {
   transaction_id: {
@@ -9,6 +9,7 @@ module.exports = db.define('transaction_customer', {
   },
   customer_id: { type: DataTypes.INTEGER },
   total: { type: DataTypes.DECIMAL(10, 0) },
+  discount: { type: DataTypes.INTEGER },
   delivery_price: { type: DataTypes.DECIMAL(10, 0) },
   delivery_address: { type: DataTypes.TEXT() },
 }, {

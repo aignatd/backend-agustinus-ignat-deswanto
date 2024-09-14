@@ -1,5 +1,5 @@
-const mdlTransCustomer = require('../models/transcustomermdl');
-const mdlItemCustomer = require('../models/transitemmdl');
+const mdlTransCustomer = require('@models/transcustomermdl');
+const mdlItemCustomer = require('@models/transitemmdl');
 
 let newtransactionctrl = async (req, res) => {
 	try {

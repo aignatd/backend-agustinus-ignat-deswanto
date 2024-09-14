@@ -2,7 +2,7 @@ const { v4: uuidv4 } = require('uuid');
 const jwt = require('jsonwebtoken');
 const moment = require('moment-timezone');
 
-const values = require("../config/jwtcon");
+const values = require("@config/jwtcon");
 
 module.exports = class authdata {
 	constructor(req) {
@@ -58,19 +58,4 @@ module.exports = class authdata {
     console.log("Token ->", token);
     return { token, lastdatetime };
   }
-
-	async checkToken() {
-    const header = this.header.authorization || '';
-    const token = header.split(/\s+/).pop();
-
-    console.log('Token data ->', token);
-
-    try {
-      const decoded = await jwt.verify(token, values.jwtkey);
-      return { status: true, result: decoded };
-    }
-    catch (err) {
-      return { status: false, result: err.name };
-    }
-	}
 }
